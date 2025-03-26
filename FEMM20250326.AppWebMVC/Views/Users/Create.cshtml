@@ -1,0 +1,56 @@
+﻿@model FEMM20250326.AppWebMVC.Models.User
+
+@{
+    ViewData["Title"] = "Crear";
+}
+
+<h1>Crear Usuario</h1>
+
+<h4>Usuario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+            <div class="form-group col-6">
+                <label asp-for="Username" class="control-label">Usuario</label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group col-6">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group col-6">
+                <label asp-for="Password" class="control-label">Contraseña</label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+                <div class="form-group col-6">
+                    <label asp-for="ConfirmarPassword" class="control-label"></label>
+                    <input asp-for="ConfirmarPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmarPassword" class="text-danger"></span>
+                </div>
+            <div class="form-group">
+                <label asp-for="Role" class="control-label">Rol</label>
+                    <select asp-for="Role" class="form-control">
+                        <option value="">SELECCIONAR</option>
+                        <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+                        <option value="GERENTE">GERENTE</option>
+                    </select>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-4">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-danger">Regresar</a>
+            </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

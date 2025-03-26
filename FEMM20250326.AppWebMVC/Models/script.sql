@@ -40,18 +40,25 @@ CREATE TABLE Users (
 );
 GO
 
-ALTER TABLE Warehouses
-DROP COLUMN Notes;
-GO
+--ALTER TABLE Warehouses
+--DROP COLUMN Notes;
+--GO
 
-ALTER TABLE Brands
-DROP COLUMN Country;
-GO
+--ALTER TABLE Brands
+--DROP COLUMN Country;
+--GO
 
-ALTER TABLE Products
-DROP COLUMN PurchasePrice, Notes;
-GO
+--ALTER TABLE Products
+--DROP COLUMN PurchasePrice, Notes;
+--GO
 
-ALTER TABLE Users
-DROP COLUMN Notes;
-GO
+--ALTER TABLE Users
+--DROP COLUMN Notes;
+--GO
+
+
+--kikito	kikito123@gmail.com	827ccb0eea8a706c4c34a16891f84e7b	ADMINISTRADOR
+--password 12345
+
+--Fran	fran123@gmail.com 827ccb0eea8a706c4c34a16891f84e7b	GERENTE
+--12345
