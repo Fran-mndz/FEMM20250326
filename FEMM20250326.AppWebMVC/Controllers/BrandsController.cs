@@ -9,29 +9,22 @@ using FEMM20250326.AppWebMVC.Models;
 
 namespace FEMM20250326.AppWebMVC.Controllers
 {
-    public class WarehousesController : Controller
+    public class BrandsController : Controller
     {
         private readonly Test20250324DbContext _context;
 
-        public WarehousesController(Test20250324DbContext context)
+        public BrandsController(Test20250324DbContext context)
         {
             _context = context;
         }
 
-        // GET: Warehouses
-        public async Task<IActionResult> Index(Warehouse warehouse, int topRegistro = 10)
+        // GET: Brands
+        public async Task<IActionResult> Index()
         {
-            var query = _context.Warehouses.AsQueryable();
-            if (!string.IsNullOrWhiteSpace(warehouse.WarehouseName))
-                query = query.Where(s => s.WarehouseName.Contains(warehouse.WarehouseName));
-
-            if (topRegistro > 0)
-                query = query.Take(topRegistro);
-
-            return View(await query.ToListAsync());
+            return View(await _context.Brands.ToListAsync());
         }
 
-        // GET: Warehouses/Details/5
+        // GET: Brands/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,39 +32,39 @@ namespace FEMM20250326.AppWebMVC.Controllers
                 return NotFound();
             }
 
-            var warehouse = await _context.Warehouses
+            var brand = await _context.Brands
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (warehouse == null)
+            if (brand == null)
             {
                 return NotFound();
             }
 
-            return View(warehouse);
+            return View(brand);
         }
 
-        // GET: Warehouses/Create
+        // GET: Brands/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Warehouses/Create
+        // POST: Brands/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,WarehouseName")] Warehouse warehouse)
+        public async Task<IActionResult> Create([Bind("Id,BrandName,Country")] Brand brand)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(warehouse);
+                _context.Add(brand);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(warehouse);
+            return View(brand);
         }
 
-        // GET: Warehouses/Edit/5
+        // GET: Brands/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -79,22 +72,22 @@ namespace FEMM20250326.AppWebMVC.Controllers
                 return NotFound();
             }
 
-            var warehouse = await _context.Warehouses.FindAsync(id);
-            if (warehouse == null)
+            var brand = await _context.Brands.FindAsync(id);
+            if (brand == null)
             {
                 return NotFound();
             }
-            return View(warehouse);
+            return View(brand);
         }
 
-        // POST: Warehouses/Edit/5
+        // POST: Brands/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,WarehouseName")] Warehouse warehouse)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,BrandName,Country")] Brand brand)
         {
-            if (id != warehouse.Id)
+            if (id != brand.Id)
             {
                 return NotFound();
             }
@@ -103,12 +96,12 @@ namespace FEMM20250326.AppWebMVC.Controllers
             {
                 try
                 {
-                    _context.Update(warehouse);
+                    _context.Update(brand);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!WarehouseExists(warehouse.Id))
+                    if (!BrandExists(brand.Id))
                     {
                         return NotFound();
                     }
@@ -119,10 +112,10 @@ namespace FEMM20250326.AppWebMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(warehouse);
+            return View(brand);
         }
 
-        // GET: Warehouses/Delete/5
+        // GET: Brands/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,34 +123,34 @@ namespace FEMM20250326.AppWebMVC.Controllers
                 return NotFound();
             }
 
-            var warehouse = await _context.Warehouses
+            var brand = await _context.Brands
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (warehouse == null)
+            if (brand == null)
             {
                 return NotFound();
             }
 
-            return View(warehouse);
+            return View(brand);
         }
 
-        // POST: Warehouses/Delete/5
+        // POST: Brands/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var warehouse = await _context.Warehouses.FindAsync(id);
-            if (warehouse != null)
+            var brand = await _context.Brands.FindAsync(id);
+            if (brand != null)
             {
-                _context.Warehouses.Remove(warehouse);
+                _context.Brands.Remove(brand);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool WarehouseExists(int id)
+        private bool BrandExists(int id)
         {
-            return _context.Warehouses.Any(e => e.Id == id);
+            return _context.Brands.Any(e => e.Id == id);
         }
     }
 }

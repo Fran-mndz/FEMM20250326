@@ -11,8 +11,5 @@ public partial class Warehouse
 
     [Required(ErrorMessage = "El nombre de la bodega es obligatorio")]
     public string WarehouseName { get; set; } = null!;
-
-    public string? Notes { get; set; }
-
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 }
