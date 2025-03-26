@@ -19,11 +19,14 @@ namespace FEMM20250326.AppWebMVC.Controllers
         }
 
         // GET: Warehouses
-        public async Task<IActionResult> Index(Warehouse warehouse)
+        public async Task<IActionResult> Index(Warehouse warehouse, int topRegistro = 10)
         {
             var query = _context.Warehouses.AsQueryable();
             if (!string.IsNullOrWhiteSpace(warehouse.WarehouseName))
                 query = query.Where(s => s.WarehouseName.Contains(warehouse.WarehouseName));
+
+            if (topRegistro > 0)
+                query = query.Take(topRegistro);
 
             return View(await query.ToListAsync());
         }
