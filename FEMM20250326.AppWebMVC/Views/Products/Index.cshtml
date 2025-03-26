@@ -1,0 +1,94 @@
+﻿@model IEnumerable<FEMM20250326.AppWebMVC.Models.Product>
+
+@{
+    ViewData["Title"] = "Productos";
+}
+
+<h1>Productos</h1>
+
+<form asp-action="Index">
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <label class="control-label">Nombre de producto</label>
+                <input type="text" name="ProductName" class="form-control" />
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label class="control-label">Cant. Registros</label>
+                <select name="topRegistro" class="form-control">
+                    <option selected value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="60">60</option>
+                    <option value="100">100</option>
+                    <option value="0">Todos</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <input type="submit" value="Buscar" class="btn btn-primary" />
+            <a asp-action="Create" class="btn btn-info">Añadir producto</a>
+        </div>
+    </div>
+</form>
+<br />
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+               Descripcion
+            </th>
+            <th>
+               Precio
+            </th>
+            <th>
+                Marca
+            </th>
+            <th>
+                Bodega
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand.BrandName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Warehouse.WarehouseName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+             $('#myTable').DataTable({
+               "language":languageTable
+             });
+        });
+    </script>
+}

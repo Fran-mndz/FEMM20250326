@@ -1,4 +1,4 @@
-﻿﻿-- Creación de la base de datos (Creación de la base de datos)
+﻿-- Creación de la base de datos (Creación de la base de datos)
 CREATE DATABASE Test20250324DB;
 GO
 
@@ -26,7 +26,7 @@ CREATE TABLE Products (
     Description TEXT,                       -- Descripción del producto (Descripción del producto)
     Price DECIMAL(10, 2) NOT NULL,          -- Precio del producto (Precio del producto)
     WarehouseID INT FOREIGN KEY REFERENCES Warehouses(Id), -- ID de la bodega (ID de la bodega)
-    BrandID INT FOREIGN KEY REFERENCES Brands(Id),              -- ID de la marca (ID de la marca)
+    BrandID INT FOREIGN KEY REFERENCES Brands(Id)             -- ID de la marca (ID de la marca)
 );
 GO
 
@@ -36,7 +36,7 @@ CREATE TABLE Users (
     Username VARCHAR(255) NOT NULL,         -- Nombre de usuario (Nombre de usuario)
     Email VARCHAR(255) UNIQUE NOT NULL,     -- Correo electrónico del usuario (Correo electrónico del usuario)
     Password CHAR(32) NOT NULL,     -- Hash de la contraseña del usuario (Hash de la contraseña del usuario)
-    Role VARCHAR(50) NOT NULL,               -- Rol del usuario (Rol del usuario)
+    Role VARCHAR(50) NOT NULL             -- Rol del usuario (Rol del usuario)
 );
 GO
 
